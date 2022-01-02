@@ -1,5 +1,17 @@
 "use strict";
 
+function drawNode(context, node) {
+  const [currentX, currentY] = node.position;
+  console.log(node);
+  context.arc(
+    currentX,
+    currentY,
+    node.size,
+    0,
+    2 * Math.PI
+  );
+}
+
 window.addEventListener('load', () => {
   const canvas = document.querySelector('#canvas');
   if (!canvas) return;
@@ -19,19 +31,27 @@ window.addEventListener('load', () => {
   const nodes = [
     {
       position: [200, 200],
+      size: config.size,
     },
   ];
 
   let loop;
 
   function animation() {
-    context.arc(nodes[0].position[0], nodes[0].position[1], config.size, 0, 2 * Math.PI);
+    const [currentX, currentY] = nodes[0].position;
+
+    // context.arc(
+    //   currentX,
+    //   currentY,
+    //   config.size,
+    //   0,
+    //   2 * Math.PI
+    // );
+    drawNode(context, nodes[0]);
+    nodes[0].position[0] = currentX + 1;
+    nodes[0].position[1] = currentY + 1;
+
     context.fill();
-
-    const [previousX, previousY] = nodes[0].position;
-    nodes[0].position[0] = previousX + 1;
-    nodes[0].position[1] = previousY + 1;
-
     loop = requestAnimationFrame(animation);
   }
 
