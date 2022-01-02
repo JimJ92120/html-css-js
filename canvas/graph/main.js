@@ -1,8 +1,22 @@
 "use strict";
 
+function graph(count, height, width, size) {
+  return [...Array(count).keys()].map(() => {
+    return {
+      position: [
+        Math.random() * width,
+        Math.random() * height
+      ],
+      size
+    }
+  });
+}
+
 function drawNode(context, node) {
   const [currentX, currentY] = node.position;
-  console.log(node);
+
+  context.beginPath();
+  context.moveTo(currentX, currentY);
   context.arc(
     currentX,
     currentY,
@@ -10,18 +24,8 @@ function drawNode(context, node) {
     0,
     2 * Math.PI
   );
-}
-
-function moveNode(nodes, iter) {
-  const [currentX, currentY] = nodes[0].position;
-
-  nodes[iter].position[0] = currentX + 1;
-  nodes[iter].position[1] = currentY + 1;
-}
-
-function animateNode(context, nodes, iter) {
-  drawNode(context, nodes[iter]);
-  moveNode(nodes, iter);
+  context.closePath();
+  context.fill();
 }
 
 window.addEventListener('load', () => {
@@ -37,22 +41,22 @@ window.addEventListener('load', () => {
   context.canvas.width = documentClientRect.width;
 
   const config = {
-    size: 4,
+    size: 2,
     color: 'rgba(255, 255, 255, 1)',
   };
-  const nodes = [
-    {
-      position: [200, 200],
-      size: config.size,
-    },
-  ];
+  const nodes = graph(
+    50,
+    context.canvas.height,
+    context.canvas.width,
+    config.size
+  );
 
   let loop;
+  console.log(nodes);
 
   function animation() {
-    animateNode(context, nodes, 0);
+    nodes.forEach((node, index) => drawNode(context, node));
 
-    context.fill();
     loop = requestAnimationFrame(animation);
   }
 
