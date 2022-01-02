@@ -7,6 +7,7 @@ function graph(count, height, width, size) {
         Math.random() * width,
         Math.random() * height
       ],
+      direction: 0,
       size
     }
   });
@@ -26,6 +27,13 @@ function drawNode(context, node) {
   );
   context.closePath();
   context.fill();
+}
+
+function updateNodePosition(nodes, iter, offsetX = 1, offsetY = 1) {
+  const { position: previousPosition } = nodes[iter];
+
+  nodes[iter].position[0] = previousPosition[0] + offsetX;
+  nodes[iter].position[1] = previousPosition[1] + offsetY;
 }
 
 window.addEventListener('load', () => {
@@ -55,7 +63,10 @@ window.addEventListener('load', () => {
   console.log(nodes);
 
   function animation() {
-    nodes.forEach((node, index) => drawNode(context, node));
+    nodes.forEach((node, iter) => {
+      drawNode(context, node);
+      updateNodePosition(nodes, iter, 4, 4);
+    });
 
     loop = requestAnimationFrame(animation);
   }
