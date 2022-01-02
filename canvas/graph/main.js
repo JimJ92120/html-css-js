@@ -12,6 +12,18 @@ function drawNode(context, node) {
   );
 }
 
+function moveNode(nodes, iter) {
+  const [currentX, currentY] = nodes[0].position;
+
+  nodes[iter].position[0] = currentX + 1;
+  nodes[iter].position[1] = currentY + 1;
+}
+
+function animateNode(context, nodes, iter) {
+  drawNode(context, nodes[iter]);
+  moveNode(nodes, iter);
+}
+
 window.addEventListener('load', () => {
   const canvas = document.querySelector('#canvas');
   if (!canvas) return;
@@ -38,18 +50,7 @@ window.addEventListener('load', () => {
   let loop;
 
   function animation() {
-    const [currentX, currentY] = nodes[0].position;
-
-    // context.arc(
-    //   currentX,
-    //   currentY,
-    //   config.size,
-    //   0,
-    //   2 * Math.PI
-    // );
-    drawNode(context, nodes[0]);
-    nodes[0].position[0] = currentX + 1;
-    nodes[0].position[1] = currentY + 1;
+    animateNode(context, nodes, 0);
 
     context.fill();
     loop = requestAnimationFrame(animation);
