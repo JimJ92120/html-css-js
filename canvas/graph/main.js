@@ -8,14 +8,18 @@ function randomDirection() {
   return 1;
 }
 
-function graph(count, height, width, size) {
+function checkDistance(from, to) {
+  return Math.sqrt(Math.pow(to[0] - from[0], 2) + Math.pow(to[1] - from[1], 2));
+}
+
+function graph(count, height, width, size, color) {
   return [...Array(count).keys()].map(() => {
     return {
       color: `rgba(
-        ${Math.random() * 256},
-        ${Math.random() * 256},
-        ${Math.random() * 256},
-        1
+        ${color[0] * 255},
+        ${color[1] * 255},
+        ${color[2] * 255},
+        ${color[3]}
       )`,
       direction: [
         randomDirection(),
@@ -30,8 +34,8 @@ function graph(count, height, width, size) {
   });
 }
 
-function drawNode(context, node) {
-  const { color, position } = node;
+function drawNode(context, nodes, iter) {
+  const { color, position, size } = nodes[iter];
   const [currentX, currentY] = position;
 
   context.beginPath();
@@ -40,12 +44,44 @@ function drawNode(context, node) {
   context.arc(
     currentX,
     currentY,
-    node.size,
+    size,
     0,
     2 * Math.PI
   );
   context.closePath();
   context.fill();
+}
+
+function drawLine(context, nodes, iter, config = {
+  offsetRatio: 500,
+  lineWidthRatio: 1,
+  color: [1, 1, 1]
+}) {
+  const { position, size } = nodes[iter];
+  const [currentX, currentY] = position;
+  const { color, lineWidthRatio, offsetRatio } = config;
+
+  nodes.map((sibilingNode) => {
+    const { position: siblingPosition } = sibilingNode;
+    const distance = checkDistance(position, siblingPosition);
+    const offset = 1 - distance / offsetRatio;
+
+    context.strokeStyle = `rgba(
+      ${color[0] * 255},
+      ${color[1] * 255},
+      ${color[2] * 255},
+      ${offset}
+    )`;
+    context.lineWidth = offset * lineWidthRatio;
+    context.beginPath();
+    context.moveTo(currentX, currentY);
+    context.lineTo(
+      siblingPosition[0] + size / Math.PI,
+      siblingPosition[1] + size / Math.PI
+    );
+    context.closePath();
+    context.stroke();
+  });
 }
 
 function moveNode(nodes, iter, size, distancePerFrame, dimensions) {
@@ -117,21 +153,29 @@ window.addEventListener('load', () => {
   if (!context) return;
 
   const documentClientRect =  document.documentElement.getBoundingClientRect();
-  const { height, width } = documentClientRect;
+  const height = documentClientRect.height * 0.75;
+  const width = documentClientRect.width * 0.75;
 
   context.canvas.height = height;
   context.canvas.width = width;
 
+  const mainColor = [0.75, 0.25, 0.5, 1];
   const config = {
-    size: 5,
-    color: 'rgba(255, 255, 255, 1)',
-    distancePerFrame: 3,
+    size: 0,
+    color: mainColor,
+    distancePerFrame: 1,
+    lines: {
+      offsetRatio: 500,
+      lineWidthRatio: 0.5,
+      color: mainColor,
+    }
   };
   const nodes = graph(
-    10,
+    25,
     context.canvas.height,
     context.canvas.width,
-    config.size
+    config.size,
+    config.color
   );
 
   let loop;
@@ -153,17 +197,12 @@ window.addEventListener('load', () => {
           height
         ]
       );
-      drawNode(context, node);
+      drawNode(context, nodes, iter);
+      drawLine(context, nodes, iter, config.lines);
     });
 
     loop = requestAnimationFrame(animation);
   }
 
   loop = requestAnimationFrame(animation);
-
-  // stop after 5 seconds.
-  // setTimeout(() => {
-  //   cancelAnimationFrame(loop);
-  //   console.log('stop');
-  // }, 5000);
 });
