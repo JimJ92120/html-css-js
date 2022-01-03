@@ -153,19 +153,27 @@ window.addEventListener('load', () => {
   if (!context) return;
 
   const documentClientRect =  document.documentElement.getBoundingClientRect();
-  const height = documentClientRect.height * 0.75;
-  const width = documentClientRect.width * 0.75;
+  const height = documentClientRect.height * (
+    documentClientRect.height >= documentClientRect.width
+      ? 1.25
+      : 0.5
+  );
+  const width = documentClientRect.width * (
+    documentClientRect.height > documentClientRect.width
+      ? 1.25
+      : 0.5
+  );
 
   context.canvas.height = height;
   context.canvas.width = width;
 
-  const mainColor = [0.75, 0.25, 0.5, 1];
+  const mainColor = [0.75, 0.25, 0.5, 0.1];
   const config = {
-    size: 0,
+    size: 5,
     color: mainColor,
-    distancePerFrame: 1,
+    distancePerFrame: 0.5,
     lines: {
-      offsetRatio: 500,
+      offsetRatio: 600,
       lineWidthRatio: 0.5,
       color: mainColor,
     }
