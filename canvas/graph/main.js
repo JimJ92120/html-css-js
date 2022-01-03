@@ -153,16 +153,12 @@ window.addEventListener('load', () => {
   if (!context) return;
 
   const documentClientRect =  document.documentElement.getBoundingClientRect();
-  const height = documentClientRect.height * (
-    documentClientRect.height >= documentClientRect.width
-      ? 1
-      : 0.5
-  );
-  const width = documentClientRect.width * (
-    documentClientRect.height > documentClientRect.width
-      ? 1
-      : 0.5
-  );
+  const height = documentClientRect.height >= documentClientRect.width
+    ? documentClientRect.height
+    : documentClientRect.height * 0.75;
+  const width = documentClientRect.height > documentClientRect.width
+    ? documentClientRect.width
+    : documentClientRect.height * 0.75;
 
   context.canvas.height = height;
   context.canvas.width = width;
@@ -173,8 +169,10 @@ window.addEventListener('load', () => {
     color: mainColor,
     distancePerFrame: 0.5,
     lines: {
-      offsetRatio: 1000,
-      lineWidthRatio: 0.25,
+      offsetRatio: documentClientRect.height > documentClientRect.width
+        ? 200
+        : 1000,
+      lineWidthRatio: 0.15,
       color: mainColor,
     }
   };
