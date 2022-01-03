@@ -7,7 +7,6 @@ function graph(count, height, width, size) {
         Math.random() * width,
         Math.random() * height
       ],
-      direction: 0,
       size
     }
   });
@@ -29,11 +28,13 @@ function drawNode(context, node) {
   context.fill();
 }
 
-function updateNodePosition(nodes, iter, offsetX = 1, offsetY = 1) {
-  const { position: previousPosition } = nodes[iter];
+function updateNodePosition(nodes, iter, offsets) {
+  const {
+    position: previousPosition
+  } = nodes[iter];
 
-  nodes[iter].position[0] = previousPosition[0] + offsetX;
-  nodes[iter].position[1] = previousPosition[1] + offsetY;
+  nodes[iter].position[0] = previousPosition[0] + offsets[0];
+  nodes[iter].position[1] = previousPosition[1] + offsets[1];
 }
 
 window.addEventListener('load', () => {
@@ -63,9 +64,22 @@ window.addEventListener('load', () => {
   console.log(nodes);
 
   function animation() {
+    context.clearRect(
+      0,
+      0,
+      context.canvas.width,
+      context.canvas.height
+    );
     nodes.forEach((node, iter) => {
+      updateNodePosition(
+        nodes,
+        iter,
+        [
+          Math.random() * 10,
+          Math.random() * 10
+        ]
+      );
       drawNode(context, node);
-      updateNodePosition(nodes, iter, 4, 4);
     });
 
     loop = requestAnimationFrame(animation);
