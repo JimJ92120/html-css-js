@@ -171,8 +171,10 @@ window.addEventListener('load', () => {
     lines: {
       offsetRatio: documentClientRect.height > documentClientRect.width
         ? 200
-        : 1000,
-      lineWidthRatio: 0.15,
+        : 500,
+      lineWidthRatio: documentClientRect.height > documentClientRect.width
+        ? 0.15
+        : 0.25,
       color: mainColor,
     }
   };
