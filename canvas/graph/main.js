@@ -205,4 +205,14 @@ window.addEventListener('load', () => {
   }
 
   loop = requestAnimationFrame(animation);
+
+  const button = document.querySelector('#stop');
+  if (!button) return;
+
+  button.addEventListener('click', () => {
+    if (!loop) return;
+
+    cancelAnimationFrame(loop);
+    loop = null;
+  });
 });
