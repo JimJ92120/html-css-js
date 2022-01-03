@@ -155,12 +155,12 @@ window.addEventListener('load', () => {
   const documentClientRect =  document.documentElement.getBoundingClientRect();
   const height = documentClientRect.height * (
     documentClientRect.height >= documentClientRect.width
-      ? 1.25
+      ? 1
       : 0.5
   );
   const width = documentClientRect.width * (
     documentClientRect.height > documentClientRect.width
-      ? 1.25
+      ? 1
       : 0.5
   );
 
