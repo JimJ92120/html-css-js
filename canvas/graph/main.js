@@ -11,6 +11,12 @@ function randomDirection() {
 function graph(count, height, width, size) {
   return [...Array(count).keys()].map(() => {
     return {
+      color: `rgba(
+        ${Math.random() * 256},
+        ${Math.random() * 256},
+        ${Math.random() * 256},
+        1
+      )`,
       direction: [
         randomDirection(),
         randomDirection()
@@ -25,9 +31,11 @@ function graph(count, height, width, size) {
 }
 
 function drawNode(context, node) {
-  const [currentX, currentY] = node.position;
+  const { color, position } = node;
+  const [currentX, currentY] = position;
 
   context.beginPath();
+  context.fillStyle = color;
   context.moveTo(currentX, currentY);
   context.arc(
     currentX,
@@ -109,26 +117,25 @@ window.addEventListener('load', () => {
   if (!context) return;
 
   const documentClientRect =  document.documentElement.getBoundingClientRect();
+  const { height, width } = documentClientRect;
 
-  context.canvas.height = documentClientRect.height;
-  context.canvas.width = documentClientRect.width;
+  context.canvas.height = height;
+  context.canvas.width = width;
 
   const config = {
-    size: 2,
+    size: 5,
     color: 'rgba(255, 255, 255, 1)',
-    distancePerFrame: Math.random() * 10,
+    distancePerFrame: 3,
   };
   const nodes = graph(
-    5,
+    10,
     context.canvas.height,
     context.canvas.width,
     config.size
   );
 
   let loop;
-  console.log(nodes);
-
-  function animation() {
+  const animation = () => {
     context.clearRect(
       0,
       0,
@@ -142,8 +149,8 @@ window.addEventListener('load', () => {
         config.size,
         config.distancePerFrame,
         [
-          documentClientRect.width,
-          documentClientRect.height
+          width,
+          height
         ]
       );
       drawNode(context, node);
@@ -152,9 +159,9 @@ window.addEventListener('load', () => {
     loop = requestAnimationFrame(animation);
   }
 
-  context.fillStyle = config.color;
   loop = requestAnimationFrame(animation);
 
+  // stop after 5 seconds.
   // setTimeout(() => {
   //   cancelAnimationFrame(loop);
   //   console.log('stop');
