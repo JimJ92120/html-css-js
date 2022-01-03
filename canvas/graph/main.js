@@ -1,6 +1,4 @@
 "use strict";
-console.log(Math.random() * 3 - 2,
-Math.random() * 3 - 2);
 
 function randomDirection() {
   const res = Math.floor(Math.random() * 2);
@@ -42,7 +40,7 @@ function drawNode(context, node) {
   context.fill();
 }
 
-function updateNodePosition(nodes, iter, size, offsets, dimensions) {
+function moveNode(nodes, iter, size, offsets, dimensions) {
   const {
     direction,
     position: nodePosition
@@ -51,27 +49,22 @@ function updateNodePosition(nodes, iter, size, offsets, dimensions) {
   // right
   if (direction[0] === 1
     && nodePosition[0] + offsets[0] <= dimensions[0] - size
-  ) {
-    nodes[iter].position[0] = nodePosition[0] + Math.abs(offsets[0]);
-  }
+  ) nodes[iter].position[0] = nodePosition[0] + Math.abs(offsets[0]);
   // left
   if (direction[0] === 0
     && nodePosition[0] - offsets[0] >= 0 + size
-  ) {
-    nodes[iter].position[0] = nodePosition[0] - Math.abs(offsets[0]);
-  }
+  ) nodes[iter].position[0] = nodePosition[0] - Math.abs(offsets[0]);
   // up
   if (direction[1] === 1
     && nodePosition[1] - offsets[1] >= 0 + size
-  ) {
-    nodes[iter].position[1] = nodePosition[1] - offsets[1];
-  }
+  ) nodes[iter].position[1] = nodePosition[1] - offsets[1];
   // down
   if (direction[1] === 0
     && nodePosition[1] + offsets[1] <= dimensions[1] - size
-  ) {
-    nodes[iter].position[1] = nodePosition[1] + offsets[1];
-  }
+  ) nodes[iter].position[1] = nodePosition[1] + offsets[1];
+}
+function updateNodePosition(nodes, iter, size, offsets, dimensions) {
+  moveNode(nodes, iter, size, offsets, dimensions)
 }
 
 window.addEventListener('load', () => {
