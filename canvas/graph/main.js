@@ -169,7 +169,7 @@ window.addEventListener('load', () => {
 
   const mainColor = [0.75, 0.25, 0.5, 0.1];
   const config = {
-    size: 0,
+    size: 1,
     color: mainColor,
     distancePerFrame: 0.5,
     lines: {
