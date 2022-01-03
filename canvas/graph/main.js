@@ -169,12 +169,12 @@ window.addEventListener('load', () => {
 
   const mainColor = [0.75, 0.25, 0.5, 0.1];
   const config = {
-    size: 5,
+    size: 0,
     color: mainColor,
     distancePerFrame: 0.5,
     lines: {
-      offsetRatio: 600,
-      lineWidthRatio: 0.5,
+      offsetRatio: 1000,
+      lineWidthRatio: 0.25,
       color: mainColor,
     }
   };
