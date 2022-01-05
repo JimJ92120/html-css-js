@@ -15,7 +15,6 @@
       padding: 0;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
       min-height: 100vh;
     }
@@ -25,9 +24,10 @@
     }
 
     #character {
-      position: relative;
+      position: absolute;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateY(-50%);
       height: 4rem;
       width: 4rem;
       background: transparent url('./skeleton.png') 0 0 no-repeat;
@@ -74,12 +74,48 @@
       }
     }
     
+    .controls {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .control {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #571515;
+      border: 0px solid transparent;
+      border-radius: 5px 5px;
+      line-height: 0;
+      padding: 0;
+      margin: 0;
+      width: 3rem;
+      height: 3rem;
+      cursor: pointer;
+    }
+    .control:hover {
+      background: #665757;
+    }
+    .control[data-control="up"] {
+      transform: rotateZ(180deg);
+      bottom: 1rem;
+    }
+    .control[data-control="left"] {
+      transform: rotateZ(90deg);
+      bottom: 2rem;
+    }
+    .control[data-control="right"] {
+      transform: rotateZ(-90deg);
+      bottom: 2rem;
+    }
   </style>
   <script src="main.js"></script>
 </head>
 
 <body class="px-5">
-  <header class="container text-center">
+  <header class="container text-center mt-5">
     <h1>CSS: Spritesheets</h1>
     <div>
       <a href="../../" target="__blank">Home</a>
@@ -93,6 +129,16 @@
   </header>
   <main class="container mt-5">
     <div id="character"></div>
+    <div class="controls row mx-0 justify-content-center mt-4">
+      <div class="col-12">
+        <div class="control mx-auto" data-control="up">V</div>
+      </div>
+      <div class="col-12 row justify-content-between mt-4">
+        <div class="control" data-control="left">V</div>
+        <div class="control" data-control="down">V</div>
+        <div class="control" data-control="right">V</div>
+      </div>
+    </div>
   </main>
 </body>
 
