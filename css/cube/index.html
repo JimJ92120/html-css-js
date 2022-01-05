@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playground > CSS: Cube</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <style>
+    body {
+      color: #ffffff;
+      background-color: #000000;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    a {
+      color: #ffffff;
+    }
+
+    .cube {
+      height: 20rem;
+      width: 100%;
+      max-width: 800px;
+      position: absolute;
+      left: 50%;
+      transform-style: preserve-3d;
+      transform: translateX(-50%) rotate3d(1, 1, 0, 5deg);
+    }
+
+    .face {
+      width: 100%;
+      height: 100%;
+      background: skyblue;
+      position: absolute;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      font-size: 2rem;
+      transition: transform 2s;
+    }
+
+    .face--front {
+      transform: translateZ(5rem);
+      opacity: 1;
+    }
+
+    .face--top {
+      transform: translateY(-12rem) translateZ(0rem) rotateX(90deg) rotateX(-5deg);
+      opacity: 0.25;
+    }
+
+    .face--bottom {
+      transform: translateZ(-5rem) translateY(12rem) rotateX(-90deg);
+      opacity: 0.25;
+    }
+  </style>
+  <script src="main.js"></script>
+</head>
+
+<body class="px-5">
+  <main class="container text-center my-5">
+    <h1>CSS: Cube</h1>
+    <div>
+      <a href="../../" target="__blank">Home</a>
+    </div>
+  </main>
+  <main class="mt-5">
+    <div class="cube mx-auto px-2 text">
+      <div class="face-1 face face--front">
+        <h2>Hello Front Face</h2>
+        <p>Lorem ipsum</p>
+        <button class="shift btn btn-light">See next</button>
+      </div>
+      <div class="face-2 face face--bottom">
+        <h2>Hello Bottom Face</h2>
+        <p>Lorem ipsum</p>
+        <button class="shift btn btn-light">See previous</button>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
