@@ -22,6 +22,12 @@ window.addEventListener('load', () => {
   ];
 
   document.addEventListener('keydown', (e) => {
+    if ('Space' === e.code) {
+      removeClassNames(character, animationClassNames);
+
+      return;
+    }
+  
     const currentDirection = keyNames.indexOf(e.code);
 
     if (currentDirection < 0) return;
