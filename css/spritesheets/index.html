@@ -23,16 +23,70 @@
     a {
       color: #ffffff;
     }
+
+    #character {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 4rem;
+      width: 4rem;
+      background: transparent url('./skeleton.png') 0 0 no-repeat;
+      /* transform: rotateY(180deg); */
+    }
+
+    #character.to-top {
+      background-position: 0 0;
+      animation: runTop 1s steps(7) infinite;
+    }
+    @keyframes runTop {
+      100% {
+        background-position: -28rem 0;
+      }
+    }
+
+    #character.to-bottom {
+      background-position: 0 -8rem;
+      animation: runTop 1s steps(7) infinite;
+    }
+    @keyframes runTop {
+      100% {
+        background-position: -28rem -8rem;
+      }
+    }
+
+    #character.to-right {
+      background-position: 0 -12rem;
+      animation: runRight 1s steps(7) infinite;
+    }
+    @keyframes runRight {
+      100% {
+        background-position: -28rem -12rem;
+      }
+    }
+
+    #character.to-left {
+      background-position: 0 -4rem;
+      animation: runLeft 1s steps(7) infinite;
+    }
+    @keyframes runLeft {
+      100% {
+        background-position: -28rem -4rem;
+      }
+    }
+    
   </style>
   <script src="main.js"></script>
 </head>
 
 <body class="px-5">
-  <main class="container text-center">
+  <header class="container text-center">
     <h1>CSS: Spritesheets</h1>
     <div>
       <a href="../../" target="__blank">Home</a>
     </div>
+  </header>
+  <main class="container mt-5">
+    <div id="character" class="to-bottom"></div>
   </main>
 </body>
 
