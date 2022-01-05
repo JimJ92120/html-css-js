@@ -15,20 +15,19 @@ window.addEventListener('load', () => {
     'to-left'
   ];
   const keyNames = [
-    'ArrowUp',
-    'ArrowDown',
-    'ArrowRight',
-    'ArrowLeft'
+    'up',
+    'down',
+    'right',
+    'left'
   ];
-
-  document.addEventListener('keydown', (e) => {
-    if ('Space' === e.code) {
+  const updateAnimation = (controlKey) => {
+    if ('space' === controlKey) {
       removeClassNames(character, animationClassNames);
 
       return;
     }
   
-    const currentDirection = keyNames.indexOf(e.code);
+    const currentDirection = keyNames.indexOf(controlKey);
 
     if (currentDirection < 0) return;
 
@@ -44,5 +43,15 @@ window.addEventListener('load', () => {
     removeClassNames(character, classNamesToRemove);
 
     return character.classList.add(animationClassNames[currentDirection]);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    updateAnimation(e.code.replace('Arrow', '').toLowerCase());
+  });
+
+  document.querySelectorAll('.control').forEach((controlElement) => {
+    controlElement.addEventListener('click', () => {
+      updateAnimation(controlElement.getAttribute('data-control'));
+    });
   });
 });
