@@ -31,14 +31,14 @@
       height: 4rem;
       width: 4rem;
       background: transparent url('./skeleton.png') 0 0 no-repeat;
-      /* transform: rotateY(180deg); */
+      background-position: 0 -8rem;
     }
 
     #character.to-top {
       background-position: 0 0;
-      animation: runTop 1s steps(7) infinite;
+      animation: runUp 1s steps(7) infinite;
     }
-    @keyframes runTop {
+    @keyframes runUp {
       100% {
         background-position: -28rem 0;
       }
@@ -46,9 +46,9 @@
 
     #character.to-bottom {
       background-position: 0 -8rem;
-      animation: runTop 1s steps(7) infinite;
+      animation: runDown 1s steps(7) infinite;
     }
-    @keyframes runTop {
+    @keyframes runDown {
       100% {
         background-position: -28rem -8rem;
       }
@@ -86,7 +86,7 @@
     </div>
   </header>
   <main class="container mt-5">
-    <div id="character" class="to-bottom"></div>
+    <div id="character"></div>
   </main>
 </body>
 
