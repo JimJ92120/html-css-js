@@ -22,6 +22,35 @@
     a {
       color: #ffffff;
     }
+
+    .book {
+      border: 2px solid rgba(255, 255, 255, 1);
+      border-radius: 5px 5px;
+      height: 600px;
+      position: relative;
+    }
+    .book__page {
+      border: 1px solid rgba(173, 31, 31, 0.5);
+      border-radius: 5px 5px;
+      height: 100%;
+      width: 50%;
+      padding: 2rem 3rem;
+      transform: translateX(100%);
+      position: absolute;
+      top: 0;
+      z-index: -1;
+      opacity: 0.1;
+    }
+    .book__page--read {
+      background: rgba(94, 86, 86, 0.9);
+      transform: translateX(0) rotateY(180deg);
+      /* backface-visibility: hidden; */
+    }
+    .book__page--current {
+      background: rgba(94, 86, 86, 0.9);
+      z-index: 1;
+      opacity: 1;
+    }
   </style>
   <script src="main.js"></script>
 </head>
@@ -32,10 +61,34 @@
     <div>
       <a href="../../" target="__blank">Home</a>
     </div>
+    <div class="mt-3">
+      <button id="previous" class="btn btn-light">Prev</button>
+      <button id="next" class="btn btn-light">Next</button>
+    </div>
   </header>
   <main class="container mt-5">
     <div class="book">
-      <h2>Hello World</h2>
+      <div class="book__page book__page--current" data-page="cover">
+        <h2>Cover</h2>
+      </div>
+      <div class="book__page" data-page="1">
+        <h2>Page 1</h2>
+      </div>
+      <div class="book__page" data-page="2">
+        <h2>Page 2</h2>
+      </div>
+      <div class="book__page" data-page="3">
+        <h2>Page 3</h2>
+      </div>
+      <div class="book__page" data-page="4">
+        <h2>Page 4</h2>
+      </div>
+      <div class="book__page" data-page="5">
+        <h2>Page 5</h2>
+      </div>
+      <div class="book__page" data-page="back">
+        <h2>Back</h2>
+      </div>
     </div>
   </main>
 </body>
