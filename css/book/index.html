@@ -40,7 +40,7 @@
       top: 0;
       z-index: -1;
       opacity: 0;
-      transition: transform 3s, opacity 2s, background 2s;
+      transition: transform 3s, opacity 2s;
     }
     .book__page--read {
       background: rgba(94, 86, 86, 0.2);
@@ -52,6 +52,23 @@
       background: rgba(94, 86, 86, 0.5);
       z-index: 1;
       opacity: 1;
+    }
+    .book__page h2 {
+      text-align: center;
+    }
+    .book__page[data-page="cover"] h2 {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .book__page[data-page="cover"] img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0.2;
+      object-fit: cover;
     }
   </style>
   <script src="main.js"></script>
@@ -72,6 +89,7 @@
     <div class="book">
       <div class="book__page book__page--current" data-page="cover">
         <h2>Cover</h2>
+        <img src="./cover.jpg">
       </div>
       <div class="book__page" data-page="1">
         <h2>Page 1</h2>
