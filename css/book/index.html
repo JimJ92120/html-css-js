@@ -24,13 +24,13 @@
     }
 
     .book {
-      border: 2px solid rgba(255, 255, 255, 1);
+      border: 0px solid transparent;
       border-radius: 5px 5px;
       height: 600px;
       position: relative;
     }
     .book__page {
-      border: 1px solid rgba(173, 31, 31, 0.5);
+      border: 0px solid transparent;
       border-radius: 5px 5px;
       height: 100%;
       width: 50%;
@@ -39,15 +39,17 @@
       position: absolute;
       top: 0;
       z-index: -1;
-      opacity: 0.1;
+      opacity: 0;
+      transition: transform 3s, opacity 2s, background 2s;
     }
     .book__page--read {
-      background: rgba(94, 86, 86, 0.9);
-      transform: translateX(0) rotateY(180deg);
+      background: rgba(94, 86, 86, 0.2);
+      transform: rotateY(180deg);
       /* backface-visibility: hidden; */
+      opacity: 0.1;
     }
     .book__page--current {
-      background: rgba(94, 86, 86, 0.9);
+      background: rgba(94, 86, 86, 0.5);
       z-index: 1;
       opacity: 1;
     }
@@ -73,18 +75,54 @@
       </div>
       <div class="book__page" data-page="1">
         <h2>Page 1</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+          aliqua. Dui faucibus in ornare quam viverra orci sagittis eu volutpat. Tellus in hac habitasse platea dictumst
+          vestibulum rhoncus. Facilisis leo vel fringilla est. Faucibus scelerisque eleifend donec pretium vulputate sapien nec
+          sagittis. Velit egestas dui id ornare. Sed viverra tellus in hac habitasse platea dictumst vestibulum. Eu ultrices
+          vitae auctor eu augue ut lectus arcu. Justo laoreet sit amet cursus sit amet dictum sit. Nam libero justo laoreet sit
+          amet cursus sit amet dictum. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Dui nunc mattis enim
+          ut tellus elementum sagittis vitae et.</p>
       </div>
       <div class="book__page" data-page="2">
         <h2>Page 2</h2>
+        <p>Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Dolor morbi non arcu risus quis varius quam
+          quisque id. Elementum tempus egestas sed sed risus. Porta non pulvinar neque laoreet suspendisse interdum consectetur.
+          Mi sit amet mauris commodo. Proin nibh nisl condimentum id venenatis a condimentum vitae sapien. Aliquet bibendum enim
+          facilisis gravida neque convallis a cras. Eget nunc scelerisque viverra mauris in aliquam sem. Dui ut ornare lectus
+          sit amet est placerat in. Non arcu risus quis varius quam quisque id.</p>
       </div>
       <div class="book__page" data-page="3">
         <h2>Page 3</h2>
+        <p>Viverra maecenas accumsan lacus vel facilisis. Consectetur lorem donec massa sapien faucibus et. Nisl condimentum id
+          venenatis a condimentum vitae sapien. Hendrerit dolor magna eget est lorem ipsum. Laoreet sit amet cursus sit amet
+          dictum sit. Sapien eget mi proin sed libero enim sed faucibus turpis. Non tellus orci ac auctor augue mauris. Feugiat
+          nibh sed pulvinar proin gravida hendrerit. Dignissim enim sit amet venenatis urna cursus. Semper risus in hendrerit
+          gravida rutrum. Velit euismod in pellentesque massa placerat duis. Sit amet luctus venenatis lectus. Fusce ut placerat
+          orci nulla pellentesque dignissim. Tellus integer feugiat scelerisque varius morbi. Fermentum leo vel orci porta non
+          pulvinar. Pellentesque elit eget gravida cum sociis natoque penatibus et magnis. In dictum non consectetur a erat nam
+          at.</p>
       </div>
       <div class="book__page" data-page="4">
         <h2>Page 4</h2>
+        <p>Aliquam sem fringilla ut morbi tincidunt. Enim praesent elementum facilisis leo vel fringilla. Eu sem integer vitae
+          justo eget. Amet aliquam id diam maecenas ultricies mi. Augue mauris augue neque gravida in fermentum. Sit amet
+          commodo nulla facilisi nullam vehicula ipsum. Cursus risus at ultrices mi tempus imperdiet nulla malesuada
+          pellentesque. Ac orci phasellus egestas tellus rutrum. Nunc congue nisi vitae suscipit tellus mauris a. Pellentesque
+          elit eget gravida cum. Porttitor leo a diam sollicitudin tempor id. Pellentesque habitant morbi tristique senectus et
+          netus et malesuada fames. A pellentesque sit amet porttitor eget dolor morbi. A iaculis at erat pellentesque
+          adipiscing commodo. Mi tempus imperdiet nulla malesuada pellentesque elit eget gravida cum. Ut eu sem integer vitae
+          justo eget magna fermentum iaculis. Tortor pretium viverra suspendisse potenti nullam ac. Tempus imperdiet nulla
+          malesuada pellentesque elit eget gravida cum.</p>
       </div>
       <div class="book__page" data-page="5">
         <h2>Page 5</h2>
+        <div>Sit amet mattis vulputate enim nulla. Eu non diam phasellus vestibulum lorem sed risus ultricies. Neque vitae
+          tempus quam pellentesque nec nam aliquam sem et. Mi sit amet mauris commodo quis. Dapibus ultrices in iaculis nunc sed
+          augue lacus viverra. Interdum velit laoreet id donec ultrices tincidunt arcu non sodales. Odio morbi quis commodo odio
+          aenean sed adipiscing diam. Morbi quis commodo odio aenean sed adipiscing. Nibh venenatis cras sed felis. Tincidunt
+          augue interdum velit euismod. Lectus urna duis convallis convallis tellus id interdum. Eget magna fermentum iaculis eu
+          non diam phasellus. Porttitor eget dolor morbi non arcu. Sit amet venenatis urna cursus. A diam sollicitudin tempor id
+          eu nisl nunc mi ipsum.</div>
       </div>
       <div class="book__page" data-page="back">
         <h2>Back</h2>
